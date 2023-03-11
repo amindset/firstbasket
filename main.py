@@ -7,6 +7,11 @@ from bs4 import BeautifulSoup
 import pandas as pd
 import xlsxwriter
 import os
+
+try:
+    SOME_SECRET = os.environ["SOME_SECRET"]
+except KeyError:
+    SOME_SECRET = "Token not available!"
     
 def First5():
     outWorkbook = xlsxwriter.Workbook('f2s3.xlsx')

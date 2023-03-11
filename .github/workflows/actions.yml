@@ -3,10 +3,13 @@ name: run main.py
 on:
   schedule:
     - cron: '2 * * * *' # At 00:00 on Monday
+  
+env:
+          SOME_SECRET: ${{ secrets.SOME_SECRET }}
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
 
       - name: checkout repo content
@@ -16,20 +19,11 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: '3.9' # install the python version needed
-
+          
       - name: install python packages
         run: |
-          py -3 -m pip install --upgrade pip
-          py -3 -m pip install -r requirements.txt
-
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          
       - name: execute py script # run main.py
-        
-        run: py -3 main.py
-
-      - name: commit files
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add -A
-          git commit -m "updated logs" --allow-empty
-
+        run: python main.py
