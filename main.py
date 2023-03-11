@@ -113,11 +113,6 @@ def First5():
         game_Play = 0
         i = 0
     outWorkbook.close()
-    # Save the contents of the Excel file to a text file
-    with open('f2s3.txt', 'wb') as f:
-        with open('f2s3.xlsx', 'rb') as excel_file:
-            f.write(excel_file.read().decode('utf-8'))
-
     return
 
 
