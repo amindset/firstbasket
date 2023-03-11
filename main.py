@@ -6,6 +6,14 @@ import bs4
 from bs4 import BeautifulSoup
 import pandas as pd
 import xlsxwriter
+import os
+
+try:
+    SOME_SECRET = os.environ["SOME_SECRET"]
+except KeyError:
+    SOME_SECRET = "Token not available!"
+    #logger.info("Token not available!")
+    #raise
 
 def First5():
     outWorkbook = xlsxwriter.Workbook('f2s3.xlsx')
@@ -105,6 +113,11 @@ def First5():
         game_Play = 0
         i = 0
     outWorkbook.close()
+    # Save the contents of the Excel file to a text file
+    with open('f2s3.txt', 'wb') as f:
+        with open('f2s3.xlsx', 'rb') as excel_file:
+            f.write(excel_file.read().decode('utf-8'))
+
     return
 
 
